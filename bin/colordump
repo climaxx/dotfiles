@@ -1,0 +1,73 @@
+#!/bin/sh
+# Usage: colordump
+# Dump 256 ansi colors to the terminal.
+
+CSI="\e["
+
+TABLE="
+     0    reset / normal
+     1    bold
+     2    faint
+     3    italic
+     4    underline
+     5    slow blink
+     6    rapid blink
+     7    reverse video
+     8    conceal
+     9    crossed-out
+    20    fraktur
+    21    double underline
+    22    normal intensity
+    23    italic off
+    24    underline off
+    25    blink off
+    27    inverse off
+    28    reveal
+    29    crossed-out off
+    30    black foreground
+    31    red foreground
+    32    green foreground
+    33    yellow foreground
+    34    blue foreground
+    35    magenta foreground
+    36    cyan foreground
+    37    white foreground
+    38    set foreground
+    39    default foreground
+    40    black background
+    41    red background
+    42    green background
+    43    yellow background
+    44    blue background
+    45    magenta background
+    46    cyan background
+    47    white background
+    48    set background
+    49    default background
+    90    bright black foreground
+    91    bright red foreground
+    92    bright green foreground
+    93    bright yellow foreground
+    94    bright blue foreground
+    95    bright magenta foreground
+    96    bright cyan foreground
+    97    bright white foreground
+    98    set bright foreground
+    99    default bright foreground
+   100    bright black background
+   101    bright red background
+   102    bright green background
+   103    bright yellow background
+   104    bright blue background
+   105    bright magenta background
+   106    bright cyan background
+   107    bright white background
+   108    set bright background
+   109    default bright background
+"
+
+echo "$TABLE" | grep -v '^$' |
+while read -r code desc; do
+    ex='\\e['
+    printf "%3d  ${CSI}${code}m%-20s${CSI}m\n" "$code" "$desc"
+done

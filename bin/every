@@ -1,0 +1,11 @@
+#!/bin/sh
+# Usage: every <seconds> <command>...
+set -e
+
+duration="$1"
+shift
+
+while true; do
+  "$@" || echo warn: exited $?
+  sleep $duration
+done

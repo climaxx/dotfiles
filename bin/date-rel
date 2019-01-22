@@ -1,0 +1,4 @@
+#!/bin/sh
+# Usage: date-rel <relative-time>
+# Print ISO8601 timestamp for relative time like '1 day ago'.
+date -uIs -d "$@" | sed 's/\+00:00$/Z/'

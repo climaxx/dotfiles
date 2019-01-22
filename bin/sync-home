@@ -1,0 +1,68 @@
+#!/bin/sh
+# Usage: sync-home [user@]host ...
+# Copy crucial dotfiles and scripts to one or more remote machines.
+#
+# Copyright (c) 2008 Ryan Tomayko <http://tomayko.com/about>
+set -e
+
+test -z "$1" || echo "$@" | grep -q -- '--help' && {
+    echo "Usage: $0 [user@]host ..."
+    exit 1
+}
+
+cd ~
+for host in "$@"; do
+    echo "sync: $host"
+    rsync -avz --include-from=- --exclude='*' ./ "${host}:" <<FILES
++ /.inputrc
++ /.bashrc
++ /.dircolors
++ /.bash_completion
++ /.screenrc
++ /.gitshrc
++ /.gitconfig
++ /.tigrc
++ /.irbrc
++ /.tmux.conf
++ /.tmux-osx.conf
++ /.tmux-linux.conf
++ /.config/git/config
++ /.vimrc
++ /.gvimrc
++ /.vim
+- /.vim/sessions
+- /.vim/plugin/netrwPlugin.vim
+- /.vim/plugin/ruby_debugger.vim
+- /.vim/swap
+- /.vim/.netrwhist
+- /.vim/tmp
++ /.vim/backup
+- /.vim/backup/**
++ /.vim/**
++ /.local/bin
++ /.local/bin/ack
++ /.local/bin/autoscreen
++ /.local/bin/lgrep
++ /.local/bin/gce
++ /.local/bin/git-big-object-report
++ /.local/bin/git-cut-branch
++ /.local/bin/git-find-object
++ /.local/bin/git-grab
++ /.local/bin/git-ls-object-refs
++ /.local/bin/git-ignore
++ /.local/bin/git-object-deflate
++ /.local/bin/git-push-log
++ /.local/bin/git-sh
++ /.local/bin/git-track
++ /.local/bin/git-incoming
++ /.local/bin/git-outgoing
++ /.local/bin/gzball
++ /.local/bin/headers
++ /.local/bin/markdown
++ /.local/bin/sync-home
++ /.local/bin/rbconfig
++ /.local/bin/rbdev
++ /.local/bin/addr
++ /.local/bin/gendiff
+FILES
+done
