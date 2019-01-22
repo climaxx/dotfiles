@@ -1,0 +1,30 @@
+alias l="ls -la"
+alias lsd="ls -ld */"
+alias lsd2="ls -lF ${colorflag} | grep --color=never '^d'"
+
+alias ..="cd .."
+alias cd..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+alias mv='mv -v'
+alias rm='rm -i -v'
+alias cp='cp -v'
+
+alias v="vim "
+#Git stuff
+
+alias gst="git status" 
+alias gc="git commit -m "
+alias ga="git add "
+alias gd="git diff "
+#color version
+alias gdc='git diff --color | sed "s/^\([^-+ ]*\)[-+ ]/\\1/" | less -r'
+alias gb="git branch "
+alias gr="grep -ir "
+alias grn="grep -irn "
+alias gp="git push "
+alias gitrep="git log --pretty=format:'%h: %s'"
+alias gitrep1="git log --oneline --decorate --all --graph"
+
+
